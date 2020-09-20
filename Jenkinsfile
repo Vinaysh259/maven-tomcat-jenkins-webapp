@@ -1,13 +1,10 @@
 pipeline{
-	agent {
-	    dockerfile true
-	}
-
-	environment{
-	    dockerRegistry = "vinaysh259/test"
-	    dockerCred = 'dockre-hub'
-	    dockerImage = ''
-	}
+	agent any
+	//environment{
+	  //  dockerRegistry = "vinaysh259/test"
+	   // dockerCred = 'dockre-hub'
+	   // dockerImage = ''
+	//}
 
 	tools{
 		maven 'maven-3.6.3'
@@ -30,29 +27,30 @@ pipeline{
 			}
 			
 		 }
+
 		 
-		 stage('Docker Image Build'){
-		 	steps{
-		 		script{
-		 		    dockerImage = docker.build("Webapp:${env.BUILD_ID}")
-		 		}
-		 	}
-		 }
+		// stage('Docker Image Build'){
+		 	//steps{
+		 		//script{
+		 		//    dockerImage = docker.build("Webapp:${env.BUILD_ID}")
+		 	//	}
+		 //	}
+		// }
 		 
-		 stage('Deploy Docker Image'){
+	//	 stage('Deploy Docker Image'){
 
-		                   steps{
-		                       
-		                       script{
-		                           docker.withRegistry('',dockerCred){
-		                               dockerImage.push()
-		                           }
-
-		                       }
-
-		                   }
-
-		               }
- 		 		
+//		                   steps{
+//		                       
+//		                       script{
+//		                           docker.withRegistry('',dockerCred){
+//		                               dockerImage.push(LATEST)
+//		                           }
+//
+//		                       }
+//
+//		                   }
+//
+//		               }
+		 		
 	}
 }
