@@ -1,5 +1,11 @@
 pipeline{
 	agent any
+	environment{
+	    dockerRegistry = vinaysh259/test
+	    dockerCred = 'dockre-hub'
+	    dockerImage = ''
+	}
+
 	tools{
 		maven 'maven-3.6.3'
 		}
@@ -15,21 +21,34 @@ pipeline{
 				}
 			}
 			
-		stage('Build'){
+		stage('Maven Build'){
 			steps {
 			sh 'mvn clean package'
 			}
 			
 		 }
 		 
-		 stage('Deployment'){
+		 stage('Docker Image Build'){
 		 	steps{
-		 		deploy(
-		 			adapters: tomcat9
-		 			war: target/mywebapp.war
-		 			contextPath: mywebapp
-		 	)
+		 		script{
+		 		    dockerImage = docker.build dockerRegistry + ":BUILD_NUMBER"
+		 		}
 		 
+		 stage('Deploy Docker Image'){
+
+		                   steps{
+		                       
+		                       script{
+		                           docker.withRegistry('',dockerCred){
+		                               dockerImage.push()
+		                           }
+
+		                       }
+
+		                   }
+
+		               }
+ 		 
 		 }
 		}
 	}
