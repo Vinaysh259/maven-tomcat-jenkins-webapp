@@ -27,6 +27,19 @@ pipeline{
 			}
 			
 		 }
+		 
+		 stage('Docker Build and Push'){
+							 environment{
+							     dockerCred = credentials('docker-hub')
+							     dockerRegistry = "vinaysh259/test"
+							 }
+
+		                         sh 'docker build --tag=webapp-1.0.0'
+		                         sh 'docker tag webapp-1.0.0 ${dockerRegistry}:webapp-1.0.0'
+		                         sh 'docker login -u ${dockerCred_USR} -p ${dockerCred_PSW} docker.io'
+		                         sh 'docker push ${dockerRegistry}:webapp-1.0.0'
+		                     }
+
 
 		 
 		// stage('Docker Image Build'){
