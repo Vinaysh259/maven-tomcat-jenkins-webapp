@@ -1,5 +1,8 @@
 pipeline{
-	agent any
+	agent {
+	    dockerfile true
+	}
+
 	environment{
 	    dockerRegistry = "vinaysh259/test"
 	    dockerCred = 'dockre-hub'
