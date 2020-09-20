@@ -35,7 +35,7 @@ pipeline{
 							 }
 							
 							steps{
-							     sh 'docker build --tag=webapp1'
+							     sh 'docker build -t=webapp1'
 		                         sh 'docker tag webapp1 ${dockerRegistry}:webapp1'
 		                         sh 'docker login -u ${dockerCred_USR} -p ${dockerCred_PSW} docker.io'
 		                         sh 'docker push ${dockerRegistry}:webapp1'    
