@@ -33,6 +33,8 @@ pipeline{
 		 		script{
 		 		    dockerImage = docker.build dockerRegistry + ":BUILD_NUMBER"
 		 		}
+		 	}
+		 }
 		 
 		 stage('Deploy Docker Image'){
 
@@ -48,8 +50,6 @@ pipeline{
 		                   }
 
 		               }
- 		 
-		 }
-		}
+ 		 		
 	}
 }
