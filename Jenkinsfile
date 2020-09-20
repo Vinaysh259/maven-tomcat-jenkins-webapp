@@ -31,7 +31,7 @@ pipeline{
 		 stage('Docker Image Build'){
 		 	steps{
 		 		script{
-		 		    dockerImage = docker.build dockerRegistry + ":BUILD_NUMBER"
+		 		    dockerImage = docker.build("Webapp:${env.BUILD_ID}")
 		 		}
 		 	}
 		 }
