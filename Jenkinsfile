@@ -35,10 +35,10 @@ pipeline{
 							 }
 							
 							steps{
-							     sh 'docker build --tag=webapp-1.0.0'
-		                         sh 'docker tag webapp-1.0.0 ${dockerRegistry}:webapp-1.0.0'
+							     sh 'docker build --tag=webapp1'
+		                         sh 'docker tag webapp1 ${dockerRegistry}:webapp1'
 		                         sh 'docker login -u ${dockerCred_USR} -p ${dockerCred_PSW} docker.io'
-		                         sh 'docker push ${dockerRegistry}:webapp-1.0.0'    
+		                         sh 'docker push ${dockerRegistry}:webapp1'    
 							}
 
 		                    
